@@ -24,8 +24,9 @@ class MainActivity : ComponentActivity() {
             navController = rememberSwipeDismissableNavController()
             WearApp(
                 navController = navController,
-                intent = this.intent
+                intent = intent,
             )
         }
+
     }
 }

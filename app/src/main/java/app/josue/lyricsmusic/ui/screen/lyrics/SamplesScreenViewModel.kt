@@ -1,8 +1,8 @@
-package app.josue.lyricsmusic.ui.screen
+package app.josue.lyricsmusic.ui.screen.lyrics
 
 import androidx.lifecycle.ViewModel
 import com.google.android.horologist.annotations.ExperimentalHorologistApi
-import com.google.android.horologist.media.model.Media
+import com.google.android.horologist.media.repository.PlayerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,24 +11,20 @@ import javax.inject.Inject
 @HiltViewModel
 class SamplesScreenViewModel
 
+@OptIn(ExperimentalHorologistApi::class)
 @Inject
-constructor() : ViewModel() {
+constructor(
+    private val playerRepository: PlayerRepository,
+) : ViewModel() {
 
     val uiState: StateFlow<UiState> = MutableStateFlow(
         UiState(
-            samples = listOf(),
+            lyrics = ""
         ),
     )
 
-    @OptIn(ExperimentalHorologistApi::class)
-    data class Sample(
-        val id: Int,
-        val name: String,
-        val mediaItems: List<Media>,
-    )
-
     data class UiState(
-        val samples: List<Sample>,
+        val lyrics: String,
     )
 
 }

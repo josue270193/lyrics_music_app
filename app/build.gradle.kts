@@ -18,10 +18,13 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+            manifestPlaceholders["schemeSuffix"] = "-debug"
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -36,6 +39,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -48,7 +52,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.play.services.wearable)
     implementation(platform(libs.compose.bom))
     implementation(libs.ui)
@@ -62,6 +65,10 @@ dependencies {
     implementation(libs.hilt.navigationcompose)
     implementation(libs.tiles)
     implementation(libs.tiles.material)
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.session)
+    implementation(libs.media3.datasource.okhttp)
+    implementation(libs.datastore.preferences)
     implementation(libs.horologist.compose.tools)
     implementation(libs.horologist.compose.material)
     implementation(libs.horologist.compose.layout)
@@ -69,7 +76,15 @@ dependencies {
     implementation(libs.horologist.audio)
     implementation(libs.horologist.audio.ui)
     implementation(libs.horologist.media.ui)
+    implementation(libs.horologist.media.data)
+    implementation(libs.horologist.media3.backend)
+    implementation(libs.horologist.network.awareness)
     implementation(libs.watchface.complications.data.source.ktx)
+    implementation(libs.ok.http3)
+    implementation(libs.ok.http3.logging.interceptor)
+    implementation(libs.coil.kt)
+    implementation(libs.coil.kt.compose)
+    implementation(libs.coil.kt.svg)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.ui.tooling)
